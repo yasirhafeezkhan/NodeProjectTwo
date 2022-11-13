@@ -2,6 +2,7 @@ import express, { Request, Response, NextFunction } from "express";
 import { loginUser } from "../services/LoginService";
 import * as jwt from "jsonwebtoken";
 import privateKey from "dotenv";
+import { sign } from "crypto";
 
 let output;
 privateKey.config();
@@ -11,9 +12,10 @@ export async function login(req: Request, res: Response) {
   let email = req.body.email;
   let password = req.body.password;
   output = await loginUser(email, password, res).then((output: any) => {
+    console.log("======output from service=====", output);
     if (output) {
       const jwtPayload = {
-        id: output.registrationId,
+        id: output.id,
         firstName: output.firstName,
         email: output.email,
         password: output.password,

@@ -16,6 +16,6 @@ route.get("/users", isAuth, getUsers);
 route.get("/user/:id", isAuth, getUser);
 
 //===Update User
-route.patch("/user", isAuth, updateUser);
+route.patch("/user/:id", isAuth, updateUser);
 
 export default route;

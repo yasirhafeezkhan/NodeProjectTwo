@@ -2,11 +2,10 @@ import express, { Express, Request, Response, NextFunction } from "express";
 import {
   getAllUsers,
   getOneUser,
-  addUserRegistration,
-} from "../services/RegistrationService";
-import jwtDecode from "jwt-decode";
-import { json } from "stream/consumers";
-
+  updateUserRegistration,
+} from "../services/UserService";
+import jwt_decode from "jwt-decode";
+import { error } from "console";
 //=== Varaibles
 let output: any;
 let param: string;
@@ -39,27 +38,31 @@ export async function getUser(req: Request, res: Response) {
     });
 }
 
-//===Add User Registration
-export async function addUser(req: Request, res: Response) {
-  output = await addUserRegistration(req.body)
-    .then((output) => {
-      res
-        .status(200)
-        .json({ message: "Registered Successfully", user: output });
-    })
-    .catch((error) => {
-      res.status(300).json("Not found");
-      console.log("===Record not found===", error);
-    });
-}
-
 export async function updateUser(req: Request, res: Response) {
-  authUserId(req);
+  try {
+    let userId = req.params.id;
+    output = await updateUserRegistration(req, userId)
+      .then((output) => {
+        if (output)
+          res
+            .status(200)
+            .json({ message: "Updated successfully", user: output });
+        else res.status(401).json(`User not found with id ${userId}`);
+      })
+      .catch((error) => {
+        res.status(403).json(error);
+        console.log(error);
+      });
+  } catch (error) {
+    res.status(403).json(error);
+    console.log(error);
+  }
 }
 
-function authUserId(req: Request) {
-  let userToken: any = req.headers.authorization;
-  console.log("======user token====", userToken);
-  let userDetails: any = jwtDecode(userToken);
-  console.log("=====user details====", userDetails);
-}
+// function authUserId(req: Request) {
+//   const userToken: any = req.headers.authorization;
+//   console.log("======user token====", userToken);
+//   const decode: any = jwt_decode(userToken);
+//   console.log("=====user details====", decode);
+//   return decode.email;
+// }

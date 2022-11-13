@@ -1,5 +1,6 @@
-import { Sequelize } from "sequelize-typescript";
+import express, { Express, Request, Response, NextFunction } from "express";
 import registration from "../models/Registration";
+let output: any;
 
 //===Service Functions Start===//
 
@@ -14,4 +15,15 @@ export async function getOneUser(id: string) {
     where: registration.sequelize?.literal(`registration_id=$id`),
     bind: { id },
   });
+}
+
+//Update Registration user
+export async function updateUserRegistration(req: Request, id: string) {
+  output = "";
+  output = await registration.findOne({
+    where: registration.sequelize?.literal(`registration_id=$id`),
+    bind: { id },
+  });
+  if (output) return await registration.update(req.body, { where: { id: id } });
+  else return false;
 }
