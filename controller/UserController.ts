@@ -58,11 +58,3 @@ export async function updateUser(req: Request, res: Response) {
     console.log(error);
   }
 }
-
-// function authUserId(req: Request) {
-//   const userToken: any = req.headers.authorization;
-//   console.log("======user token====", userToken);
-//   const decode: any = jwt_decode(userToken);
-//   console.log("=====user details====", decode);
-//   return decode.email;
-// }

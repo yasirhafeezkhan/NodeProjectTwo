@@ -5,6 +5,7 @@ const validate =
   (schema: AnyZodObject) =>
   (req: Request, res: Response, next: NextFunction) => {
     try {
+      console.log("===== request body in validator====", req.body);
       const result = schema.safeParse(req.body);
       if (!result.success) {
         console.log("======in  result error====", result.error.issues);

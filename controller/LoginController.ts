@@ -9,9 +9,10 @@ privateKey.config();
 const jwtPrivateKey: any = process.env.PRIVATEKEY;
 
 export async function login(req: Request, res: Response) {
+  console.log("===== request body in  controller====", req.body);
   let email = req.body.email;
   let password = req.body.password;
-  output = await loginUser(email, password, res).then((output: any) => {
+  output = await loginUser(email, password, res, req).then((output: any) => {
     console.log("======output from service=====", output);
     if (output) {
       const jwtPayload = {

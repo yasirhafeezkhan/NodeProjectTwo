@@ -7,8 +7,10 @@ let output: any;
 export async function loginUser(
   email: string,
   password: string,
-  res: Response
+  res: Response,
+  req: Request
 ) {
+  console.log("===== request body in  controller====", req.body);
   output = "";
   output = await db.query(
     `SELECT
