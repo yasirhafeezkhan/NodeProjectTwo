@@ -4,8 +4,6 @@ import {
   getOneUser,
   updateUserRegistration,
 } from "../services/UserService";
-import jwt_decode from "jwt-decode";
-import { error } from "console";
 //=== Varaibles
 let output: any;
 let param: string;
@@ -15,7 +13,6 @@ let param: string;
 export async function getUsers(req: Request, res: Response) {
   output = await getAllUsers()
     .then((output) => {
-      console.log("====response output===", output);
       res.status(200).json(output);
     })
     .catch((error) => {
@@ -29,7 +26,6 @@ export async function getUser(req: Request, res: Response) {
   param = req.params.id;
   output = await getOneUser(param)
     .then((output) => {
-      console.log("====response output===", output);
       res.status(200).json(output);
     })
     .catch((error) => {

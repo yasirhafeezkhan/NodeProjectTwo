@@ -5,6 +5,7 @@ export interface registrationI {
   firstName: string;
   lastName: string;
   fullName: string;
+  photo: string;
   email: string;
   password: string;
   phoneNo: number;
@@ -58,6 +59,14 @@ export default class demoRegistration extends Model implements registrationI {
     defaultValue: "",
   })
   fullName!: string;
+
+  @Column({
+    allowNull: false,
+    field: "photo",
+    type: DataType.STRING,
+    defaultValue: "",
+  })
+  photo!: string;
 
   @Column({
     allowNull: false,

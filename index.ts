@@ -5,24 +5,21 @@ import dotenv from "dotenv";
 import registrationRoute from "./routes/RegistrationRoute";
 import loginRoute from "./routes/Login";
 import userRoute from "./routes/User";
-import multer from "multer";
 
 //===Configure
 dotenv.config();
 const app = express();
-//Multer config
-const upload = multer();
+
 //===Port Access
 const PORT = process.env.PORT;
 
 //=== Body Parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-//multer app use
-app.use(upload.any());
+
 //=== Checking Route
 app.get("/", (req: Request, res: Response) => {
-  res.status(200).json({ Message: "Hello" });
+  res.status(200).json({ Message: "Hi! Welcome to node project" });
 });
 
 //===Port Listen Route
