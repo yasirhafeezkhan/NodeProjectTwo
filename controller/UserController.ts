@@ -19,7 +19,6 @@ export async function getUsers(req: Request, res: Response) {
       })
       .catch((error) => {
         res.status(300).json("Not found");
-        console.log("===Record not found===", error);
       });
   } catch (error) {
     res.status(500).json(error);
@@ -36,7 +35,6 @@ export async function getUser(req: Request, res: Response) {
       })
       .catch((error) => {
         res.status(300).json("Not found");
-        console.log("===Record not found===", error);
       });
   } catch (error) {
     res.status(500).json(error);

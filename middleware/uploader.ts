@@ -41,11 +41,7 @@ export default async function uploader(
   next: NextFunction
 ) {
   try {
-    console.log("=====calling uploader====");
     upload(req, res, function (err) {
-      console.log("=====req body in validator====", req.body);
-      console.log("=====req files in validator====", req.file);
-
       if (err instanceof multer.MulterError) {
         res.status(403).json({ Error: err });
       } else if (err) {
