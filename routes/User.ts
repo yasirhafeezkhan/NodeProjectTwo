@@ -1,5 +1,10 @@
 import express from "express";
-import { getUsers, getUser, updateUser } from "../controller/UserController";
+import {
+  getUsers,
+  getUser,
+  updateUser,
+  deleteUser,
+} from "../controller/UserController";
 import { registrationSchema } from "../schema/registrationSchema";
 import validateResource from "../middleware/middleware";
 import isAuth from "../middleware/authCheck";
@@ -17,5 +22,8 @@ route.get("/user/:id", isAuth, getUser);
 
 //===Update User
 route.patch("/user/:id", isAuth, updateUser);
+
+//===Delete User
+route.delete("/user/:id", isAuth, deleteUser);
 
 export default route;

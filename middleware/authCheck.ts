@@ -31,7 +31,7 @@ export default async function isAuth(
       }
     } catch (error) {
       console.log(error);
-      res.status(403).json({ message: "Access is Denied" });
+      res.status(403).json({ message: "Access is Denied", error: error });
     }
     return tokenResponse;
   } else {
