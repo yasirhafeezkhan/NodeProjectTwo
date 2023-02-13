@@ -5,17 +5,22 @@ import dotenv from "dotenv";
 import registrationRoute from "./routes/RegistrationRoute";
 import loginRoute from "./routes/Login";
 import userRoute from "./routes/User";
+import cors from "cors";
+import { graphqlHTTP } from "express-graphql";
+import schema from "./graphQL";
 
 //===Configure
 dotenv.config();
 const app = express();
-
+app.use(cors());
 //===Port Access
 const PORT = process.env.PORT;
 
 //=== Body Parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use("/graphql", graphqlHTTP({ schema, graphiql: true }));
 
 //=== Checking Route
 app.get("/", (req: Request, res: Response) => {

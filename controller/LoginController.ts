@@ -20,12 +20,9 @@ export async function login(req: Request, res: Response) {
           if (output) {
             const jwtPayload = {
               id: output.id,
-              firstName: output.firstName,
-              email: output.email,
-              password: output.password,
             };
             const webToken = jwt.sign(jwtPayload, jwtPrivateKey, {
-              expiresIn: "5d",
+              expiresIn: "1d",
             });
             res
               .status(200)

@@ -22,9 +22,6 @@ export default async function isAuth(
       if (userDetails) {
         tokenResponse = {
           id: userDetails.registrationId,
-          firstName: userDetails.firstName,
-          email: userDetails.email,
-          password: userDetails.password,
           status: 200,
         };
         next();
@@ -33,7 +30,6 @@ export default async function isAuth(
       console.log(error);
       res.status(403).json({ message: "Access is Denied", error: error });
     }
-    return tokenResponse;
   } else {
     res.status(403).json({ message: "No Token found" });
   }
