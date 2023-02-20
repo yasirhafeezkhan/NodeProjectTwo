@@ -2,12 +2,8 @@ import express, { Request, Response } from "express";
 import bodyParser from "body-parser";
 import db from "./config/database";
 import dotenv from "dotenv";
-import registrationRoute from "./routes/RegistrationRoute";
-import loginRoute from "./routes/Login";
-import userRoute from "./routes/User";
+import invoiceRoute from "./routes/InvoiceRoute";
 import cors from "cors";
-import { graphqlHTTP } from "express-graphql";
-import schema from "./graphQL";
 
 //===Configure
 dotenv.config();
@@ -19,8 +15,6 @@ const PORT = process.env.PORT;
 //=== Body Parser
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-app.use("/graphql", graphqlHTTP({ schema, graphiql: true }));
 
 //=== Checking Route
 app.get("/", (req: Request, res: Response) => {
@@ -38,6 +32,4 @@ app.listen(PORT, () => {
 });
 
 //===Api Route Starts
-app.use("/api", registrationRoute);
-app.use("/api", loginRoute);
-app.use("/api", userRoute);
+app.use("/api", invoiceRoute);
